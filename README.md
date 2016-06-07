@@ -5,9 +5,11 @@ elasticsearch.yml:
     index:
         analysis:
             filter:
-                transformType: 1
-                keepOrigin: true
-                minTermLength: 2
+                pinyin:
+                    type: pinyin
+                    transformType: 1
+                    keepOrigin: true
+                    minTermLength: 2
 
 index settings:
 
@@ -17,9 +19,18 @@ index settings:
         "index": {
           "analysis": {
             "filter": {
-              "transformType": 1,
-              "keepOrigin": true,
-              "minTermLength": 2
+              "pinyin": {
+                "type": "pinyin",
+                "transformType": 1,
+                "keepOrigin": true,
+                "minTermLength": 2
+              }
+            },
+            "analyzer": {
+              "pinyin_analyzer": {
+                "tokenizer": "keyword",
+                "filter": "pinyin"
+              }
             }
           }
         }
