@@ -6,7 +6,7 @@
 
     <groupId>xyz.dowenwork.npl</groupId>
     <artifactId>elasticsearch-analysis-token-filter-pinyin</artifactId>
-    <version>2.3.4.1-SNAPSHOT</version>
+    <version>2.4.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <description>拼音转换tokenFilter ES支持</description>
 
@@ -22,8 +22,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <dependency.junit.version>4.12</dependency.junit.version>
-        <dependency.token-filter-pinyin.version>5.5.0.0</dependency.token-filter-pinyin.version>
-        <elasticsearch.version>2.3.4</elasticsearch.version>
+        <dependency.token-filter-pinyin.version>5.5.2.0</dependency.token-filter-pinyin.version>
+        <elasticsearch.version>2.4.0</elasticsearch.version>
         <dependency.randomizedtesting.version>2.3.4</dependency.randomizedtesting.version>
         <elasticsearch.plugin.name>elasticsearch-analysis-token-filter-pinyin</elasticsearch.plugin.name>
         <elasticsearch.plugin.classname>xyz.dowenwork.elasticsearch.plugin.AnalysisPinyinPlugin</elasticsearch.plugin.classname>
