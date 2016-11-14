@@ -1,13 +1,13 @@
 package xyz.dowenwork.elasticsearch.plugin;
 
-import org.elasticsearch.common.inject.Module;
-import org.elasticsearch.index.analysis.AnalysisModule;
+import org.elasticsearch.index.analysis.TokenFilterFactory;
+import org.elasticsearch.indices.analysis.AnalysisModule;
+import org.elasticsearch.plugins.AnalysisPlugin;
 import org.elasticsearch.plugins.Plugin;
-import xyz.dowenwork.elasticsearch.index.analysis.PinyinAnalysisBinderProcessor;
-import xyz.dowenwork.elasticsearch.indices.analysis.PinyinAnalysisModule;
+import xyz.dowenwork.elasticsearch.index.analysis.PinyinTokenFilterFactory;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>create at 16-6-6</p>
@@ -16,26 +16,13 @@ import java.util.Collections;
  * @since 2.3.3.0
  */
 @SuppressWarnings("unused")
-public class AnalysisPinyinPlugin extends Plugin {
+public class AnalysisPinyinPlugin extends Plugin implements AnalysisPlugin {
     @Override
-    public String name() {
-        return "analysis-pinyin";
-    }
+    public Map<String, AnalysisModule.AnalysisProvider<TokenFilterFactory>> getTokenFilters() {
+        Map<String, AnalysisModule.AnalysisProvider<TokenFilterFactory>> factories = new HashMap<>();
 
-    @Override
-    public String description() {
-        return "拼音转换";
-    }
+        factories.put("pinyin", (indexSettings, environment, name, settings) -> new PinyinTokenFilterFactory(indexSettings, name, settings));
 
-    @Override
-    public Collection<Module> nodeModules() {
-        return Collections.<Module>singletonList(new PinyinAnalysisModule());
-    }
-
-    /**
-     * Automatically called with the analysis module.
-     */
-    public void onModule(AnalysisModule module) {
-        module.addProcessor(new PinyinAnalysisBinderProcessor());
+        return factories;
     }
 }
